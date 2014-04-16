@@ -1,23 +1,38 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <title>HTML5 Semantic Markup Demo: Cross Browser</title>
-    <script type="text/javascript">
-		alert("Hello World!"); //弹出包含Hello world!文字的警告框
-    </script>
-    <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <link rel="stylesheet" href="http://demos.w3avenue.com/html5-unleashed-tips-tricks-and-techniques/html5semanticmarkup.csa" type="text/css" />
-	<style type="text/css">
-	body {
-		color:green;
-	}
-	</style>
-</head>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 Semantic Markup Demo: Cross Browser</title>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+		<script type="text/javascript">
+			alert("Hello World!");
+			//弹出包含Hello world!文字的警告框
+		</script>
+		<style type="text/css">
+			body {
+				color: green;
+			}
+		</style>
+	</head>
 
-
-<body>
-<p><a href="javascript:history.back();">Go back</a></p>
-</body>
+	<body>
+		<header data-role="header">
+			<h1>head</h1>
+		</header>
+		<footer data-role="footer">
+			<nav data-role="navbar" data-iconpos="top">
+				<ul>
+					<li >
+						<a href="index.html" data-icon="home">home</a>
+					</li>
+					<li >
+						<a href="#" data-icon="video">video</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
+	</body>
 </html>

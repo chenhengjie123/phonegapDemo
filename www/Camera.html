@@ -1,107 +1,149 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Capture Photo</title>
+	<head>
+		<title>Capture Photo</title>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css" />
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.mobile-1.4.2.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var pictureSource;
+			// picture source
+			var destinationType;
+			// sets the format of returned value
 
-    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
-    <script type="text/javascript" charset="utf-8">
+			// Wait for device API libraries to load
+			//
+			document.addEventListener("deviceready", onDeviceReady, false);
 
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value
+			// device APIs are available
+			//
+			function onDeviceReady() {
+				pictureSource = navigator.camera.PictureSourceType;
+				destinationType = navigator.camera.DestinationType;
+			}
 
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready",onDeviceReady,false);
+			// Called when a photo is successfully retrieved
+			//
+			function onPhotoDataSuccess(imageData) {
+				// Uncomment to view the base64-encoded image data
+				// console.log(imageData);
 
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
-    }
+				// Get image handle
+				//
+				var smallImage = document.getElementById('smallImage');
 
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoDataSuccess(imageData) {
-      // Uncomment to view the base64-encoded image data
-      // console.log(imageData);
+				// Unhide image elements
+				//
+				smallImage.style.display = 'block';
 
-      // Get image handle
-      //
-      var smallImage = document.getElementById('smallImage');
+				// Show the captured photo
+				// The inline CSS rules are used to resize the image
+				//
+				smallImage.src = "data:image/jpeg;base64," + imageData;
+			}
 
-      // Unhide image elements
-      //
-      smallImage.style.display = 'block';
+			// Called when a photo is successfully retrieved
+			//
+			function onPhotoURISuccess(imageURI) {
+				// Uncomment to view the image file URI
+				// console.log(imageURI);
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      smallImage.src = "data:image/jpeg;base64," + imageData;
-    }
+				// Get image handle
+				//
+				var largeImage = document.getElementById('largeImage');
 
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI
-      // console.log(imageURI);
+				// Unhide image elements
+				//
+				largeImage.style.display = 'block';
 
-      // Get image handle
-      //
-      var largeImage = document.getElementById('largeImage');
+				// Show the captured photo
+				// The inline CSS rules are used to resize the image
+				//
+				largeImage.src = imageURI;
+			}
 
-      // Unhide image elements
-      //
-      largeImage.style.display = 'block';
+			// A button will call this function
+			//
+			function capturePhoto() {
+				// Take picture using device camera and retrieve image as base64-encoded string
+				navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+					quality : 50,
+					destinationType : destinationType.DATA_URL
+				});
+			}
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
-      //
-      largeImage.src = imageURI;
-    }
+			// A button will call this function
+			//
+			function capturePhotoEdit() {
+				// Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+				navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+					quality : 20,
+					allowEdit : true,
+					destinationType : destinationType.DATA_URL
+				});
+			}
 
-    // A button will call this function
-    //
-    function capturePhoto() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
-        destinationType: destinationType.DATA_URL });
-    }
+			// A button will call this function
+			//
+			function getPhoto(source) {
+				// Retrieve image file location from specified source
+				navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+					quality : 50,
+					destinationType : destinationType.FILE_URI,
+					sourceType : source
+				});
+			}
 
-    // A button will call this function
-    //
-    function capturePhotoEdit() {
-      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
-        destinationType: destinationType.DATA_URL });
-    }
+			// Called if something bad happens.
+			//
+			function onFail(message) {
+				alert('Failed because: ' + message);
+			}
 
-    // A button will call this function
-    //
-    function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-        destinationType: destinationType.FILE_URI,
-        sourceType: source });
-    }
+		</script>
+	</head>
+	<body>
+		<header data-role="header">
+			<h1>Camera</h1>
+		</header>
+		<p>
+			&nbsp;
+		</p>
+		<button onclick="capturePhoto();">
+			Capture Photo
+		</button>
+		<br>
+		<br>
+		<button onclick="capturePhotoEdit();">
+			Capture Editable Photo
+		</button>
+		<br>
+		<br>
+		<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">
+			From Photo Library
+		</button>
+		<br>
+		<br>
+		<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">
+			From Photo Album
+		</button>
+		<br>
+		<br>
+		<img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+		<img style="display:none;" id="largeImage" src="" />
 
-    // Called if something bad happens.
-    //
-    function onFail(message) {
-      alert('Failed because: ' + message);
-    }
-
-    </script>
-  </head>
-  <body>
-      <p>&nbsp;</p>
-    <button onclick="capturePhoto();">Capture Photo</button> <br><br>
-    <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br><br>
-    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br><br>
-    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;" id="largeImage" src="" />
-    
-    <p><a href="javascript:history.back();">Go back</a></p>
-  </body>
+		<footer data-role="footer">
+			<nav data-role="navbar" data-iconpos="top">
+				<ul>
+					<li >
+						<a href="index.html" data-icon="home">home</a>
+					</li>
+					<li >
+						<a href="#" data-icon="video">video</a>
+					</li>
+				</ul>
+			</nav>
+		</footer>
+	</body>
 </html>
