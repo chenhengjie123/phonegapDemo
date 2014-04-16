@@ -1,0 +1,4 @@
+#ignore most files after build
+platforms/android/
+platforms/ios/
+!platforms/android/AndroidManifest.xml
