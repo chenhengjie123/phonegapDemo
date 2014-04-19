@@ -21,10 +21,8 @@
         The "device" permission is required for the 'deviceready' event.
     -->
     <feature name="http://api.phonegap.com/1.0/device" />
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-    </feature>
-    <feature name="Camera">
+	<feature name="Camera">
+	    <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
         <param name="ios-package" value="CDVCamera" />
     </feature>
             
@@ -103,5 +101,6 @@
         <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
         <access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
     -->
+    <access origin="http://192.168.1.201" />
 
 </widget>
