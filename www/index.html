@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="phonecatApp">
 	<head>
 		<meta charset="utf-8" />
 		<!--<meta name="format-detection" content="telephone=no" />-->
@@ -17,6 +17,7 @@
 		<script src="http://198.199.118.235:8081/target/target-script-min.js#phonegapDemo"></script>-->
 		<!--angular.js(v1.2.16)-->
 		<script src="js/angular.min.js"></script>
+		
 
 	</head>
 	<body>
@@ -58,6 +59,9 @@
 					</li>
 					<li  data-icon="false">
 						<a href="#angular_data" data-transition="none">angular_data</a>
+					</li>
+					<li  data-icon="false">
+						<a href="#angular_phonecatApp" data-transition="none">angular_phonecatApp</a>
 					</li>
 				</ul>
 
@@ -622,5 +626,35 @@
 				</nav>
 			</footer>
 		</section>
+		
+		<script src="js/controllers.js"></script>
+		<section data-role="page" id="angular_phonecatApp" ng-controller="PhoneListCtrl">
+			<header data-role="header" data-position="fixed">
+				<h1>angular_phonecatApp</h1>
+			</header>
+			
+			<article data-role="content">
+				  <ul data-role="listview">
+					<li ng-repeat="phone in phones">
+					  {{phone.name}}
+					  <p>{{phone.snippet}}</p>
+					</li>
+				  </ul>
+			</article>
+
+			<footer data-role="footer" data-position="fixed">
+				<nav data-role="navbar" data-iconpos="top">
+					<ul>
+						<li >
+							<a href="#index" data-icon="home" data-transition="none" data-direction="reverse">home</a>
+						</li>
+						<li >
+							<a href="#" data-icon="video">video</a>
+						</li>
+					</ul>
+				</nav>
+			</footer>
+		</section>
+		
 	</body>
 </html>
