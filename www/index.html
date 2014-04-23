@@ -16,8 +16,11 @@
 		<!--weinre-->
 		<!--
 		<script src="http://192.168.1.201:8081/target/target-script-min.js#phonegapDemo"></script>
-		<script src="http://198.199.118.235:8081/target/target-script-min.js#phonegapDemo"></script>
 		-->
+		<script>
+			window.WeinreServerURL="http://198.199.118.235:8081";
+		</script>
+		<script src="js/target-script-min.js#phonegapDemo"></script>
 		
 		<!--angular.js(v1.2.16)-->
 		<script src="js/angular.min.js"></script>
@@ -516,6 +519,7 @@
 						</tr>
 					</table>
 				</fieldset>
+				</form>
 				<footer data-role="footer" data-position="fixed">
 					<nav data-role="navbar" data-iconpos="top">
 						<ul>
@@ -528,7 +532,7 @@
 						</ul>
 					</nav>
 				</footer>
-			</form>
+
 		</section>
 
 		<section data-role="page" id="body_media">
