@@ -21,16 +21,30 @@
 		<!--ionicicons-->
 		<link rel="stylesheet" href="css/ionicons.min.css" />
 		
+		<!--app.js-->
+		<script src="js/app.js"></script>
+		
 
 	</head> 
 	<body ng-app="lightController"> 
-		<ion-side-menus> 
-			<ion-side-menu-content> 
-				content
-			</ion-side-menu-content> 
-			<ion-side-menu side="left">
-				 side
-			</ion-side-menu>
-		</ion-side-menus>
+	  <ion-side-menus>
+
+	    <!-- Center content -->
+	    <ion-side-menu-content>
+	      <ion-header-bar class="bar-dark">
+	        <h1 class="title">lightController</h1>
+	      </ion-header-bar>
+	      <ion-content>
+	      </ion-content>
+	    </ion-side-menu-content>
+
+	    <!-- Left menu -->
+	    <ion-side-menu side="left">
+	      <ion-header-bar class="bar-dark">
+	        <h1 class="title">menu</h1>
+	      </ion-header-bar>
+	    </ion-side-menu>
+
+	  </ion-side-menus>
 	 </body> 
  </html>
