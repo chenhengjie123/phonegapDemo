@@ -26,7 +26,7 @@
 		
 
 	</head> 
-	<body ng-app="lightController"> 
+	<body ng-app="lightController" ng-controller="LightControllerCtrl" > 
 	  <ion-side-menus>
 
 	    <!-- Center content -->
@@ -43,9 +43,18 @@
 	      <ion-header-bar class="bar-dark">
 	        <h1 class="title">menu</h1>
 	      </ion-header-bar>
+	      <ion-content>
+			<!-- list and list items -->
+		    <ion-list>
+		      <ion-item ng-repeat="area in areas">
+		        {{area.title}}
+		      </ion-item>
+		    </ion-list>
+	      </ion-content>
 	    </ion-side-menu>
-
 	  </ion-side-menus>
+	  
+	  
 	  
 	  <a href="index_jquery+angularjs.html">index_jquery+angularjs</a>
 	  
