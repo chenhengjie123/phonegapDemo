@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html ng-app="scfApp">
+    <head>
+        <title>SCF</title>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="lib/ionic/css/ionic.css" />
+        <link rel="stylesheet" type="text/css" href="css/common.css" />
+        
+        <!-- login -->
+        <link rel="stylesheet" type="text/css" href="css/login.css" />
+        
+        <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>-->
+        <script src="http://10.67.6.68:9090/target/target-script-min.js#anonymous"></script>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="lib/ionic/js/ionic.bundle.js"></script>
+        <script type="text/javascript" src="lib/jquery/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="lib/base64.js"></script>
+        
+        <script type="text/javascript" src="js/App.js"></script>
+        <script type="text/javascript" src="js/AppController.js"></script>
+        <script src="js/AppView.js"></script>
+        
+        <!-- login -->
+        <script src="js/login/LoginView.js"></script>
+        <script src="js/login/LoginService.js"></script>
+        <script src="js/login/LoginController.js"></script>
+        
+        
+    </head>
+    <body>
+        <app-view id="appView" ng-controller="appController"></app-view>
+    </body>
+</html>

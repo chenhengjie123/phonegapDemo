@@ -1,0 +1,19 @@
+.login{
+    margin: 0 auto;
+    min-width: 200px;
+    max-width: 300px;
+    width: 25%;
+}
+
+.login button{
+    float: right;
+}
+
+.login label{
+    padding-bottom: 0;
+    padding-top: 0
+}
+
+.login > .content{
+    padding: 0 0;
+}
