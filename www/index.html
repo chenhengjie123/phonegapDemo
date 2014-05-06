@@ -57,7 +57,7 @@
 				<ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
 					<div class="row">
                         <div class="col">{{light.name}}</div>
-                        <div class="col col-offset-80">{{light.addTime}}</div>
+                        <div class="col">{{light.addTime}}</div>
                     </div>
 				</ion-item>
 			</ion-list>
