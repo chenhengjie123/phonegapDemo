@@ -44,14 +44,21 @@
 	      </ion-header-bar>
 	      <ion-content scroll="false">
               <div class="list list-inset">
-                  <label class="item item-input">
+                  <label class="item item-input item-select">
                       <i class="icon ion-search placeholder-icon"></i>
                       <input type="text" ng-model="query" placeholder="Search">
+                      <select ng-model="orderProp">
+                        <option value="name">Alphabetical</option>
+                        <option value="-addTime">Newest</option>
+                      </select>
                   </label>
               </div>
 		  	<ion-list>
-				<ion-item ng-repeat="light in activeArea.lights | filter:query">
-					{{light.name}}
+				<ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
+					<div class="row">
+                        <div class="col">{{light.name}}</div>
+                        <div class="col col-offset-80">{{light.addTime}}</div>
+                    </div>
 				</ion-item>
 			</ion-list>
 	      </ion-content>

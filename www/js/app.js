@@ -5,6 +5,7 @@ angular.module('lightController', ['ionic'])
  * last active area index.
  */
 
+
 //need to restructure $scope.closeNewArea，$timeout  to make the check null functions together
 
 .factory('Areas', function(){
@@ -40,7 +41,8 @@ angular.module('lightController', ['ionic'])
 
 
 .controller('LightControllerCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopup, $timeout, $ionicModal, Areas) {
-	
+
+
 	// A utility function for creating a new area
 	  // with the given areaName
 	  var createArea = function(areaName) {
@@ -57,7 +59,7 @@ angular.module('lightController', ['ionic'])
 	  // Grab the last active, or the first area
 	  $scope.activeArea = $scope.areas[Areas.getLastActiveIndex()];
 
-	  
+
 	  /*
 	  $scope.newArea = function() {
 	    var areaName = prompt('Area name');
@@ -67,14 +69,14 @@ angular.module('lightController', ['ionic'])
 	  };
 	  */
 
-	  
+
 	  // Create our modal
 	  $ionicModal.fromTemplateUrl('new-area.html', function(newAreaModal) {
 	    $scope.areaModal = newAreaModal;
 	  }, {
 	    scope: $scope
 	  });
-	  
+
 	  // Called to create a new area
 	  $scope.createArea = function(area) {
   	    var newArea = Areas.newArea(area.name);
@@ -95,9 +97,9 @@ angular.module('lightController', ['ionic'])
 			  $scope.areaModal.hide();
 		  }
 	  }
-	  
-	  
-	  
+
+
+
 
 	  // Called to select the given area
 	  $scope.selectArea = function(area, index) {
@@ -117,8 +119,10 @@ angular.module('lightController', ['ionic'])
 	    if(!$scope.activeArea || !light) {
 	      return;
 	    }
+      var myDate = new Date();
 	    $scope.activeArea.lights.push({
-	      name: light.name
+	      name: light.name,
+        addTime: myDate.toLocaleString()
 	    });
 	    $scope.lightModal.hide();
 
@@ -139,7 +143,7 @@ angular.module('lightController', ['ionic'])
 	  $scope.toggleAreas = function() {
 	    $ionicSideMenuDelegate.toggleLeft();
 	  };
-	  
+
 	  $scope.isClearDatas = function() {
 	  	$ionicPopup.confirm({
 	            title: 'Confirm clear datas',
@@ -148,7 +152,7 @@ angular.module('lightController', ['ionic'])
 	            if(res) {
 	              Areas.clear();
 	  			  //reload page to make clear be effective
-	  			  location.reload() 
+	  			  location.reload()
 	            } else {
 	              ;
 	            }
@@ -169,6 +173,6 @@ angular.module('lightController', ['ionic'])
 	          break;
 	      }
 	  });
-	
-	
+
+
 });
