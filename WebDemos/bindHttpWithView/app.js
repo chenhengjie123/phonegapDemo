@@ -3,8 +3,24 @@ var bindHttpWithViewDemo = angular.module('bindHttpWithViewDemo', [
   'bindHttpWithViewDemoControllers'
 ]);
 
+    bindHttpWithViewDemo.directive( 'goClick', function ( $location ) {
+      return function ( scope, element, attrs ) {
+        var path;
+
+        attrs.$observe( 'goClick', function (val) {
+          path = val;
+        });
+
+        element.bind( 'click', function () {
+          scope.$apply( function () {
+            $location.path( path );
+          });
+        });
+      };
+    });
+
   bindHttpWithViewDemo.config(['$routeProvider',
-  function($routeProvider) {
+  function($routeProvider,$location) {
     $routeProvider.
       when('/zoneList', {
         template: '<div>zoneList:<br>{{zoneList}}</div>',
@@ -22,3 +38,7 @@ var bindHttpWithViewDemo = angular.module('bindHttpWithViewDemo', [
         redirectTo: '/zoneList'
       });
   }]);
+
+
+
+

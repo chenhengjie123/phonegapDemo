@@ -62,23 +62,34 @@ var bindHttpWithViewDemoControllers = angular.module('bindHttpWithViewDemoContro
 });
 
 bindHttpWithViewDemoControllers.controller('zoneListCtrl',
-  function ($scope, SeverData) {
+  function ($scope, SeverData, $location) {
     SeverData.getZoneList().then(function(data){
       $scope.zoneList = data;
     });
+
+    $scope.goZoneList = function (){
+      $location.path( '/zoneList' );
+    };
   }
+
 );
 
 bindHttpWithViewDemoControllers.controller('deviceListCtrl',
-  function ($scope, SeverData) {
+  function ($scope, SeverData, $location) {
     SeverData.getDeviceList().then(function(data){
       $scope.deviceList = data;
     });
+
+    $scope.goDeviceList = function (){
+      console.log($location.path());
+      location.href = '#/deviceList';
+      $location.path( '/deviceList' );
+    };
   }
 );
 
 bindHttpWithViewDemoControllers.controller('deviceCtrl',
-  function($scope, $routeParams, SeverData) {
+  function($scope, $routeParams, SeverData, $location) {
     SeverData.getDevice($routeParams.deviceId).then(function(data){
       $scope.device = data;
     });
