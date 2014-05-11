@@ -47,7 +47,6 @@ var bindHttpWithViewDemoControllers = angular.module('bindHttpWithViewDemoContro
         var devices = data.DEVICE;
         //iterates devices
         for (var device in devices){
-          console.log(devices[device]);
           if (devices[device].DEVID === deviceId){
             break;
           }
