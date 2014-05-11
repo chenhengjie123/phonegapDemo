@@ -1,4 +1,4 @@
-angular.module('lightController', ['ionic'])
+var lightControllerApp = angular.module('lightController', ['ionic'])
 /**
  * The Areas factory handles saving and loading areas
  * from local storage, and also lets us save and load the
@@ -37,10 +37,10 @@ angular.module('lightController', ['ionic'])
 			window.localStorage.removeItem("areas");
 		}
 	}
-})
+});
 
 
-.controller('LightControllerCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopup, $timeout, $ionicModal, Areas) {
+lightControllerApp.controller('LightControllerCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopup, $timeout, $ionicModal, Areas) {
 
 
 	// A utility function for creating a new area
