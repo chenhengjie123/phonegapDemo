@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>lightController app</title>
+
+		<!--ionic framework-->
+        <script type="text/javascript" src="../lib/ionic/js/ionic.bundle.js"></script>
+        <link rel="stylesheet" type="text/css" href="../lib/ionic/css/ionic.css" />
+
+		<!--ionicicons-->
+        <link rel="stylesheet" href="../lib/ionic/css/ionicons.min.css" />
+
+        <!--app js-->
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="controllers.js"></script>
+
+
+
+	</head>
+	<body ng-app="uiViewWithDirective" >
+     <button ui-sref="state1">State 1</button>
+     <button ui-sref="state2">State 2</button>
+
+     <div ui-view></div>
+
+    </body>
+ </html>
+

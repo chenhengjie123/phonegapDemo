@@ -22,8 +22,9 @@
 		<!--ionicicons-->
         <link rel="stylesheet" href="lib/ionic/css/ionicons.min.css" />
 
-		<!--app.js-->
+		<!--custom-->
 		<script src="js/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 
 	</head>
@@ -57,7 +58,7 @@
 				<ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
 					<div class="row">
                         <div class="col">{{light.name}}</div>
-                        <div class="col">{{light.addTime}}</div>
+                        <div class="col alignRight">{{light.addTime}}</div>
                     </div>
 				</ion-item>
 			</ion-list>
