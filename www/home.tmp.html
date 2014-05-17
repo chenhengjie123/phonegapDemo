@@ -1,0 +1,118 @@
+<ion-view title="{{activeArea.name}}">
+    <ion-side-menus>
+
+	    <!-- Center content -->
+	    <ion-side-menu-content>
+            <ion-nav-buttons side="left">
+                <button menu-toggle="left" class="button button-icon ion-navicon">
+                </button>
+            </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon ion-compose" ng-click="newLight()">
+                </button>
+            </ion-nav-buttons>
+	      <ion-content scroll="false">
+              <div class="list list-inset">
+                  <label class="item item-input item-select">
+                      <i class="icon ion-search placeholder-icon"></i>
+                      <input type="text" ng-model="query" placeholder="Search">
+                      <select ng-model="orderProp">
+                        <option value="name">Alphabetical</option>
+                        <option value="-addTime">Newest</option>
+                      </select>
+                  </label>
+              </div>
+		  	<ion-list>
+				<ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
+					<div class="row">
+                        <div class="col">{{light.name}}</div>
+                        <div class="col alignRight">{{light.addTime}}</div>
+                    </div>
+				</ion-item>
+			</ion-list>
+          </ion-content>
+
+
+	    </ion-side-menu-content>
+
+	    <!-- Left menu -->
+	    <ion-side-menu side="left">
+            <div class="bar bar-calm has-header">
+                <button class="button button-clear" ng-click="isClearDatas()">
+                    clearDatas
+                </button>
+                <h1 class="title">Areas</h1>
+                <button class="button button-icon ion-plus" ng-click="newArea()">
+                </button>
+            </div>
+	      <ion-content class="has-double-header" scroll="false">
+			<!-- list and list items -->
+		    <ion-list>
+		      <ion-item ng-repeat="area in areas" ng-click="selectArea(area,$index)" ng-class="{active:activeArea == area}">
+		        {{area.name}}
+		      </ion-item>
+		    </ion-list>
+	      </ion-content>
+	    </ion-side-menu>
+	  </ion-side-menus>
+</ion-view>
+
+	  <script id="new-area.html" type="text/ng-template">
+
+	    <div class="modal">
+
+	      <!-- Modal header bar -->
+	      <ion-header-bar class="bar-secondary">
+	        <h1 class="title">New area</h1>
+	        <button class="button button-clear button-positive" ng-click="closeNewArea()">Cancel</button>
+	      </ion-header-bar>
+
+	      <!-- Modal content area -->
+	      <ion-content>
+
+	        <form ng-submit="createArea(area)">
+	          <div class="list">
+	            <label class="item item-input">
+	              <input type="text" placeholder="What area do you want to add?" ng-model="area.name">
+	            </label>
+	          </div>
+	          <div class="padding">
+	            <button type="submit" class="button button-block button-positive">Create Area</button>
+	          </div>
+	        </form>
+
+	      </ion-content>
+
+	    </div>
+
+	  </script>
+
+	  <script id="new-light.html" type="text/ng-template">
+
+	    <div class="modal">
+
+	      <!-- Modal header bar -->
+	      <ion-header-bar class="bar-secondary">
+	        <h1 class="title">New light</h1>
+	        <button class="button button-clear button-positive" ng-click="closeNewLight()">Cancel</button>
+	      </ion-header-bar>
+
+	      <!-- Modal content area -->
+	      <ion-content>
+
+	        <form ng-submit="createLight(light)">
+	          <div class="list">
+	            <label class="item item-input">
+	              <input type="text" placeholder="What light do you want to add?" ng-model="light.name">
+	            </label>
+	          </div>
+	          <div class="padding">
+	            <button type="submit" class="button button-block button-positive">Create Light</button>
+	          </div>
+	        </form>
+
+	      </ion-content>
+
+	    </div>
+
+	  </script>
