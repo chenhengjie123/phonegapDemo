@@ -11,26 +11,26 @@
                 <button class="button button-icon ion-compose" ng-click="newLight()">
                 </button>
             </ion-nav-buttons>
-	      <ion-content scroll="false">
-              <div class="list list-inset">
-                  <label class="item item-input item-select">
-                      <i class="icon ion-search placeholder-icon"></i>
-                      <input type="text" ng-model="query" placeholder="Search">
-                      <select ng-model="orderProp">
-                        <option value="name">Alphabetical</option>
-                        <option value="-addTime">Newest</option>
-                      </select>
-                  </label>
-              </div>
-		  	<ion-list>
-				<ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
-					<div class="row">
-                        <div class="col">{{light.name}}</div>
-                        <div class="col alignRight">{{light.addTime}}</div>
-                    </div>
-				</ion-item>
-			</ion-list>
-          </ion-content>
+            <ion-content scroll="true" class="has-header has-footer">
+                <ion-pane class="item item-divider">
+                    <label class="item item-input item-select">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="text" ng-model="query" placeholder="Search">
+                        <select ng-model="orderProp">
+                            <option value="name">Alphabetical</option>
+                            <option value="-addTime">Newest</option>
+                        </select>
+                    </label>
+                </ion-pane>
+                <ion-list>
+                    <ion-item ng-repeat="light in activeArea.lights | filter:query | orderBy:orderProp">
+                        <div class="row">
+                            <div class="col">{{light.name}}</div>
+                            <div class="col alignRight">{{light.addTime}}</div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
 
 
 	    </ion-side-menu-content>
