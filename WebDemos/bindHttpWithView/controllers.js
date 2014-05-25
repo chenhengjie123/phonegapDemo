@@ -6,7 +6,7 @@ var bindHttpWithViewDemoControllers = angular.module('bindHttpWithViewDemoContro
   return{
 		getZoneList: function(){
       var deferred = $q.defer();
-      $http.get(baseUrl+"LIST_ZONE").
+      $http.get(baseUrl+"LIST_ZONE",{ cache: true}).
       success(function(data, status, headers, config) {
         deferred.resolve(data.ZONE);
       }).
@@ -18,7 +18,7 @@ var bindHttpWithViewDemoControllers = angular.module('bindHttpWithViewDemoContro
 
     getDeviceList: function(){
       var deferred = $q.defer();
-      $http.get(baseUrl+"list_device").
+      $http.get(baseUrl+"list_device",{ cache: true}).
       success(function(data, status, headers, config) {
         deferred.resolve(data.DEVICE);
       }).
@@ -42,7 +42,7 @@ var bindHttpWithViewDemoControllers = angular.module('bindHttpWithViewDemoContro
 		getDevice: function(deviceId){
 
       var deferred = $q.defer();
-      $http.get(baseUrl+"list_device").
+      $http.get(baseUrl+"list_device",{ cache: true}).
       success(function(data, status, headers, config) {
         var devices = data.DEVICE;
         //iterates devices

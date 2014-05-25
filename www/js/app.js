@@ -39,6 +39,7 @@ var phonegapDemo = angular.module('phonegapDemo', ['ui.router','ionic'])
 	}
 });
 
+
 phonegapDemo.config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1
@@ -53,7 +54,8 @@ phonegapDemo.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('demos', {
       url: "/demos",
-      templateUrl: "demos.tmp.html"
+      templateUrl: "demos.tmp.html",
+      controller: "phonegapDemo_DemosCtrl"
 
     })
 

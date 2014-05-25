@@ -2369,7 +2369,8 @@ window.ionic = {
 
     ele.dispatchEvent(clickEvent);
 
-    if(ele.tagName === 'INPUT' || ele.tagName === 'TEXTAREA') {
+    //Add ACE-EDITOR --chenhengjie123
+    if(ele.tagName === 'INPUT' || ele.tagName === 'TEXTAREA' || ele.tagName === 'ACE-EDITOR') {
       ele.focus();
       e.preventDefault();
     } else {
@@ -2406,12 +2407,12 @@ window.ionic = {
       // only climb up a max of 5 parents, anything more probably isn't beneficial
       if(!ele) break;
 
+      //Add ACE-EDITOR --chenhengjie123
       if( ele.tagName === "INPUT" ||
           ele.tagName === "A" ||
           ele.tagName === "BUTTON" ||
           ele.tagName === "LABEL" ||
-          ele.tagName === "TEXTAREA" ) {
-
+          ele.tagName === "TEXTAREA" || ele.tagName === 'ACE-EDITOR') {
         return ionic.tapElement(ele, e);
       }
       ele = ele.parentElement;
@@ -2420,6 +2421,7 @@ window.ionic = {
     // they didn't tap one of the above elements
     // if the currently active element is an input, and they tapped outside
     // of the current input, then unset its focus (blur) so the keyboard goes away
+    //console.log("ele.tagName: "+ele.tagName);
     blurActive();
   }
 
@@ -5011,7 +5013,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
   /**
    * An ActionSheet is the slide up menu popularized on iOS.
    *
-   * You see it all over iOS apps, where it offers a set of options 
+   * You see it all over iOS apps, where it offers a set of options
    * triggered after an action.
    */
   ionic.views.ActionSheet = ionic.views.View.inherit({
@@ -6572,7 +6574,7 @@ ionic.views.TabBarItem = ionic.views.View.inherit({
 ionic.views.TabBar = ionic.views.View.inherit({
   initialize: function(opts) {
     this.el = opts.el;
-     
+
     this.items = [];
 
     this._buildItems();
@@ -6676,7 +6678,7 @@ ionic.views.TabBar = ionic.views.View.inherit({
       this.items[i] = item;
       this._bindEventsOnItem(item);
     }
-  
+
     if(this.items.length > 0) {
       this.selectedItem = this.items[0];
     }
@@ -6956,7 +6958,7 @@ ionic.controllers.NavController = ionic.controllers.ViewController.inherit({
       last.isVisible = false;
       last.visibilityChanged && last.visibilityChanged('pop');
     }
-    
+
     // Remove the old one
     //last && last.detach();
 
@@ -9217,10 +9219,10 @@ function setupModuleLoader(window) {
 /* global
     angularModule: true,
     version: true,
-    
+
     $LocaleProvider,
     $CompileProvider,
-    
+
     htmlAnchorDirective,
     inputDirective,
     inputDirective,
@@ -10754,7 +10756,7 @@ function annotate(fn) {
  *
  *   - `Object`: then it should have a `$get` method. The `$get` method will be invoked using
  *     {@link AUTO.$injector#invoke $injector.invoke()} when an instance needs to be created.
- *   - `Constructor`: a new instance of the provider will be created using                     
+ *   - `Constructor`: a new instance of the provider will be created using
  *     {@link AUTO.$injector#instantiate $injector.instantiate()}, then treated as `object`.
  *
  * @returns {Object} registered provider instance
@@ -10884,9 +10886,9 @@ function annotate(fn) {
  *   var Ping = function($http) {
  *     this.$http = $http;
  *   };
- * 
+ *
  *   Ping.$inject = ['$http'];
- *   
+ *
  *   Ping.prototype.send = function() {
  *     return this.$http.get('/ping');
  *   };
@@ -11219,7 +11221,7 @@ function createInjector(modulesToLoad) {
  *
  * It also watches the `$location.hash()` and scrolls whenever it changes to match any anchor.
  * This can be disabled by calling `$anchorScrollProvider.disableAutoScrolling()`.
- * 
+ *
  * @example
    <example>
      <file name="index.html">
@@ -11234,7 +11236,7 @@ function createInjector(modulesToLoad) {
            // set the location.hash to the id of
            // the element you wish to scroll to.
            $location.hash('bottom');
-           
+
            // call $anchorScroll()
            $anchorScroll();
          }
@@ -11322,7 +11324,7 @@ var $animateMinErr = minErr('$animate');
  */
 var $AnimateProvider = ['$provide', function($provide) {
 
-  
+
   this.$$selectors = {};
 
 
@@ -11463,7 +11465,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @description Moves the position of the provided element within the DOM to be placed
        * either after the `after` element or inside of the `parent` element. Once complete, the
        * done() callback will be fired (if provided).
-       * 
+       *
        * @param {jQuery/jqLite element} element the element which will be moved around within the
        *   DOM
        * @param {jQuery/jqLite element} parent the parent element where the element will be
@@ -11928,9 +11930,9 @@ function $BrowserProvider(){
  *
  * @description
  * Factory that constructs cache objects and gives access to them.
- * 
+ *
  * <pre>
- * 
+ *
  *  var cache = $cacheFactory('cacheId');
  *  expect($cacheFactory.get('cacheId')).toBe(cache);
  *  expect($cacheFactory.get('noSuchCacheId')).not.toBeDefined();
@@ -11939,8 +11941,8 @@ function $BrowserProvider(){
  *  cache.put("another key", "another value");
  *
  *  // We've specified no options on creation
- *  expect(cache.info()).toEqual({id: 'cacheId', size: 2}); 
- * 
+ *  expect(cache.info()).toEqual({id: 'cacheId', size: 2});
+ *
  * </pre>
  *
  *
@@ -12123,7 +12125,7 @@ function $CacheFactoryProvider() {
  * The first time a template is used, it is loaded in the template cache for quick retrieval. You
  * can load templates directly into the cache in a `script` tag, or by consuming the
  * `$templateCache` service directly.
- * 
+ *
  * Adding via the `script` tag:
  * <pre>
  * <html ng-app>
@@ -12135,29 +12137,29 @@ function $CacheFactoryProvider() {
  *   ...
  * </html>
  * </pre>
- * 
+ *
  * **Note:** the `script` tag containing the template does not need to be included in the `head` of
  * the document, but it must be below the `ng-app` definition.
- * 
+ *
  * Adding via the $templateCache service:
- * 
+ *
  * <pre>
  * var myApp = angular.module('myApp', []);
  * myApp.run(function($templateCache) {
  *   $templateCache.put('templateId.html', 'This is the content of the template');
  * });
  * </pre>
- * 
+ *
  * To retrieve the template later, simply use it in your HTML:
  * <pre>
  * <div ng-include=" 'templateId.html' "></div>
  * </pre>
- * 
+ *
  * or get it via Javascript:
  * <pre>
  * $templateCache.get('templateId.html')
  * </pre>
- * 
+ *
  * See {@link ng.$cacheFactory $cacheFactory}.
  *
  */
@@ -14287,12 +14289,12 @@ function $DocumentProvider(){
  * Any uncaught exception in angular expressions is delegated to this service.
  * The default implementation simply delegates to `$log.error` which logs it into
  * the browser console.
- * 
+ *
  * In unit tests, if `angular-mocks.js` is loaded, this service is overridden by
  * {@link ngMock.$exceptionHandler mock $exceptionHandler} which aids in testing.
  *
  * ## Example:
- * 
+ *
  * <pre>
  *   angular.module('exceptionOverride', []).factory('$exceptionHandler', function () {
  *     return function (exception, cause) {
@@ -14301,7 +14303,7 @@ function $DocumentProvider(){
  *     };
  *   });
  * </pre>
- * 
+ *
  * This example will override the normal action of `$exceptionHandler`, to make angular
  * exceptions fail hard when they happen, instead of just logging to the console.
  *
@@ -15470,7 +15472,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
           // WebKit added support for the json responseType value on 09/03/2013
           // https://bugs.webkit.org/show_bug.cgi?id=73648. Versions of Safari prior to 7 are
           // known to throw when setting the value "json" as the response type. Other older
-          // browsers implementing the responseType 
+          // browsers implementing the responseType
           //
           // The json response type can be ignored if not supported, because JSON payloads are
           // parsed on the client-side regardless.
@@ -16756,7 +16758,7 @@ function $LocationProvider(){
  * @description
  * Simple service for logging. Default implementation safely writes the message
  * into the browser's console (if present).
- * 
+ *
  * The main purpose of this service is to simplify debugging and troubleshooting.
  *
  * The default is to log `debug` messages. You can use
@@ -16793,7 +16795,7 @@ function $LocationProvider(){
 function $LogProvider(){
   var debug = true,
       self = this;
-  
+
   /**
    * @ngdoc property
    * @name ng.$logProvider#debugEnabled
@@ -16810,7 +16812,7 @@ function $LogProvider(){
       return debug;
     }
   };
-  
+
   this.$get = ['$window', function($window){
     return {
       /**
@@ -16852,12 +16854,12 @@ function $LogProvider(){
        * Write an error message
        */
       error: consoleLog('error'),
-      
+
       /**
        * @ngdoc method
        * @name ng.$log#debug
        * @methodOf ng.$log
-       * 
+       *
        * @description
        * Write a debug message
        */
@@ -18200,7 +18202,7 @@ function $ParseProvider() {
  * <pre>
  *   // for the purpose of this example let's assume that variables `$q`, `scope` and `okToGreet`
  *   // are available in the current lexical scope (they could have been injected or passed in).
- * 
+ *
  *   function asyncGreet(name) {
  *     var deferred = $q.defer();
  *
@@ -20315,7 +20317,7 @@ function $SceDelegateProvider() {
  * allowing only the files in a specific directory to do this.  Ensuring that the internal API
  * exposed by that code doesn't markup arbitrary values as safe then becomes a more manageable task.
  *
- * In the case of AngularJS' SCE service, one uses {@link ng.$sce#methods_trustAs $sce.trustAs} 
+ * In the case of AngularJS' SCE service, one uses {@link ng.$sce#methods_trustAs $sce.trustAs}
  * (and shorthand methods such as {@link ng.$sce#methods_trustAsHtml $sce.trustAsHtml}, etc.) to
  * obtain values that will be accepted by SCE / privileged contexts.
  *
@@ -21066,7 +21068,7 @@ function $TimeoutProvider() {
       *   will invoke `fn` within the {@link ng.$rootScope.Scope#methods_$apply $apply} block.
       * @returns {Promise} Promise that will be resolved when the timeout is reached. The value this
       *   promise will be resolved with is the return value of the `fn` function.
-      * 
+      *
       */
     function timeout(fn, delay, invokeApply) {
       var deferred = $q.defer(),
@@ -21300,7 +21302,7 @@ function $WindowProvider(){
  *
  * The filter function is registered with the `$injector` under the filter name suffix with
  * `Filter`.
- * 
+ *
  * <pre>
  *   it('should be the same instance', inject(
  *     function($filterProvider) {
@@ -21376,7 +21378,7 @@ function $FilterProvider($provide) {
   }];
 
   ////////////////////////////////////////
-  
+
   /* global
     currencyFilter: false,
     dateFilter: false,
@@ -22102,9 +22104,9 @@ var uppercaseFilter = valueFn(uppercase);
  * the value and sign (positive or negative) of `limit`.
  *
  * @param {Array|string} input Source array or string to be limited.
- * @param {string|number} limit The length of the returned array or string. If the `limit` number 
+ * @param {string|number} limit The length of the returned array or string. If the `limit` number
  *     is positive, `limit` number of items from the beginning of the source array/string are copied.
- *     If the number is negative, `limit` number  of items from the end of the source array/string 
+ *     If the number is negative, `limit` number  of items from the end of the source array/string
  *     are copied. The `limit` will be trimmed if it exceeds `array.length`
  * @returns {Array|string} A new sub-array or substring of length `limit` or less if input array
  *     had less than `limit` elements.
@@ -22163,7 +22165,7 @@ var uppercaseFilter = valueFn(uppercase);
 function limitToFilter(){
   return function(input, limit) {
     if (!isArray(input) && !isString(input)) return input;
-    
+
     limit = int(limit);
 
     if (isString(input)) {
@@ -22554,7 +22556,7 @@ var htmlAnchorDirective = valueFn({
     </doc:example>
  *
  * @element INPUT
- * @param {expression} ngDisabled If the {@link guide/expression expression} is truthy, 
+ * @param {expression} ngDisabled If the {@link guide/expression expression} is truthy,
  *     then special attribute "disabled" will be set on the element
  */
 
@@ -22589,7 +22591,7 @@ var htmlAnchorDirective = valueFn({
     </doc:example>
  *
  * @element INPUT
- * @param {expression} ngChecked If the {@link guide/expression expression} is truthy, 
+ * @param {expression} ngChecked If the {@link guide/expression expression} is truthy,
  *     then special attribute "checked" will be set on the element
  */
 
@@ -22624,7 +22626,7 @@ var htmlAnchorDirective = valueFn({
     </doc:example>
  *
  * @element INPUT
- * @param {expression} ngReadonly If the {@link guide/expression expression} is truthy, 
+ * @param {expression} ngReadonly If the {@link guide/expression expression} is truthy,
  *     then special attribute "readonly" will be set on the element
  */
 
@@ -22643,7 +22645,7 @@ var htmlAnchorDirective = valueFn({
  * The `ngSelected` directive solves this problem for the `selected` atttribute.
  * This complementary directive is not removed by the browser and so provides
  * a permanent reliable place to store the binding information.
- * 
+ *
  * @example
     <doc:example>
       <doc:source>
@@ -22663,7 +22665,7 @@ var htmlAnchorDirective = valueFn({
     </doc:example>
  *
  * @element OPTION
- * @param {expression} ngSelected If the {@link guide/expression expression} is truthy, 
+ * @param {expression} ngSelected If the {@link guide/expression expression} is truthy,
  *     then special attribute "selected" will be set on the element
  */
 
@@ -22699,7 +22701,7 @@ var htmlAnchorDirective = valueFn({
      </doc:example>
  *
  * @element DETAILS
- * @param {expression} ngOpen If the {@link guide/expression expression} is truthy, 
+ * @param {expression} ngOpen If the {@link guide/expression expression} is truthy,
  *     then special attribute "open" will be set on the element
  */
 
@@ -22785,7 +22787,7 @@ var nullFormCtrl = {
  *  - `pattern`
  *  - `required`
  *  - `url`
- * 
+ *
  * @description
  * `FormController` keeps track of all its controls and nested forms as well as state of them,
  * such as being valid/invalid or dirty/pristine.
@@ -23432,7 +23434,7 @@ var inputType = {
           var text = element(by.binding('text'));
           var valid = element(by.binding('myForm.input.$valid'));
           var input = element(by.model('text'));
-          
+
           it('should initialize to model', function() {
             expect(text.getText()).toContain('me@example.com');
             expect(valid.getText()).toContain('true');
@@ -23546,7 +23548,7 @@ var inputType = {
 
             expect(value1.getText()).toContain('true');
             expect(value2.getText()).toContain('YES');
-            
+
             element(by.model('value1')).click();
             element(by.model('value2')).click();
 
@@ -24787,14 +24789,14 @@ var ngBindTemplateDirective = ['$interpolate', function($interpolate) {
  *
  * @example
    Try it here: enter text in text box and watch the greeting change.
- 
+
    <example module="ngBindHtmlExample" deps="angular-sanitize.js">
      <file name="index.html">
        <div ng-controller="ngBindHtmlCtrl">
         <p ng-bind-html="myHTML"></p>
        </div>
      </file>
-     
+
      <file name="script.js">
        angular.module('ngBindHtmlExample', ['ngSanitize'])
 
@@ -26997,7 +26999,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
  * **Note:** Here is a list of values that ngShow will consider as a falsy value (case insensitive):<br />
  * "f" / "0" / "false" / "no" / "n" / "[]"
  * </div>
- * 
+ *
  * ## A note about animations with ngShow
  *
  * Animations in ngShow/ngHide work with the show and hide events that are triggered when the directive expression
@@ -27149,7 +27151,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * </pre>
  *
  * Just remember to include the important flag so the CSS override will function.
- * 
+ *
  * <div class="alert alert-warning">
  * **Note:** Here is a list of values that ngHide will consider as a falsy value (case insensitive):<br />
  * "f" / "0" / "false" / "no" / "n" / "[]"
@@ -29564,7 +29566,7 @@ angular.module('ngAnimate', ['ng'])
           event.stopPropagation();
           var ev = event.originalEvent || event;
           var timeStamp = ev.$manualTimeStamp || ev.timeStamp || Date.now();
-          
+
           /* Firefox (or possibly just Gecko) likes to not round values up
            * when a ms measurement is used for the animation */
           var elapsedTime = parseFloat(ev.elapsedTime.toFixed(ELAPSED_TIME_MAX_DECIMAL_PLACES));
@@ -30591,14 +30593,14 @@ angular.module('ui.router.compat', ['ui.router']);
  */
 $Resolve.$inject = ['$q', '$injector'];
 function $Resolve(  $q,    $injector) {
-  
+
   var VISIT_IN_PROGRESS = 1,
       VISIT_DONE = 2,
       NOTHING = {},
       NO_DEPENDENCIES = [],
       NO_LOCALS = NOTHING,
       NO_PARENT = extend($q.when(NOTHING), { $$promises: NOTHING, $$values: NOTHING });
-  
+
 
   /**
    * Studies a set of invocables that are likely to be used multiple times.
@@ -30613,19 +30615,19 @@ function $Resolve(  $q,    $injector) {
    */
   this.study = function (invocables) {
     if (!isObject(invocables)) throw new Error("'invocables' must be an object");
-    
+
     // Perform a topological sort of invocables to build an ordered plan
     var plan = [], cycle = [], visited = {};
     function visit(value, key) {
       if (visited[key] === VISIT_DONE) return;
-      
+
       cycle.push(key);
       if (visited[key] === VISIT_IN_PROGRESS) {
         cycle.splice(0, cycle.indexOf(key));
         throw new Error("Cyclic dependency: " + cycle.join(" -> "));
       }
       visited[key] = VISIT_IN_PROGRESS;
-      
+
       if (isString(value)) {
         plan.push(key, [ function() { return $injector.get(value); }], NO_DEPENDENCIES);
       } else {
@@ -30635,17 +30637,17 @@ function $Resolve(  $q,    $injector) {
         });
         plan.push(key, value, params);
       }
-      
+
       cycle.pop();
       visited[key] = VISIT_DONE;
     }
     forEach(invocables, visit);
     invocables = cycle = visited = null; // plan is all that's required
-    
+
     function isResolve(value) {
       return isObject(value) && value.then && value.$$promises;
     }
-    
+
     return function (locals, parent, self) {
       if (isResolve(locals) && self === undefined) {
         self = parent; parent = locals; locals = null;
@@ -30653,12 +30655,12 @@ function $Resolve(  $q,    $injector) {
       if (!locals) locals = NO_LOCALS;
       else if (!isObject(locals)) {
         throw new Error("'locals' must be an object");
-      }       
+      }
       if (!parent) parent = NO_PARENT;
       else if (!isResolve(parent)) {
         throw new Error("'parent' must be a promise returned by $resolve.resolve()");
       }
-      
+
       // To complete the overall resolution, we have to wait for the parent
       // promise and for the promise for each invokable in our plan.
       var resolution = $q.defer(),
@@ -30667,28 +30669,28 @@ function $Resolve(  $q,    $injector) {
           values = extend({}, locals),
           wait = 1 + plan.length/3,
           merged = false;
-          
+
       function done() {
         // Merge parent values we haven't got yet and publish our own $$values
         if (!--wait) {
-          if (!merged) merge(values, parent.$$values); 
+          if (!merged) merge(values, parent.$$values);
           result.$$values = values;
           result.$$promises = true; // keep for isResolve()
           resolution.resolve(values);
         }
       }
-      
+
       function fail(reason) {
         result.$$failure = reason;
         resolution.reject(reason);
       }
-      
+
       // Short-circuit if parent has already failed
       if (isDefined(parent.$$failure)) {
         fail(parent.$$failure);
         return result;
       }
-      
+
       // Merge parent values if the parent has already resolved, or merge
       // parent promises and wait if the parent resolve is still in progress.
       if (parent.$$values) {
@@ -30698,13 +30700,13 @@ function $Resolve(  $q,    $injector) {
         extend(promises, parent.$$promises);
         parent.then(done, fail);
       }
-      
+
       // Process each invocable in the plan, but ignore any where a local of the same name exists.
       for (var i=0, ii=plan.length; i<ii; i+=3) {
         if (locals.hasOwnProperty(plan[i])) done();
         else invoke(plan[i], plan[i+1], plan[i+2]);
       }
-      
+
       function invoke(key, invocable, params) {
         // Create a deferred for this invocation. Failures will propagate to the resolution as well.
         var invocation = $q.defer(), waitParams = 0;
@@ -30739,11 +30741,11 @@ function $Resolve(  $q,    $injector) {
         // Publish promise synchronously; invocations further down in the plan may depend on it.
         promises[key] = invocation.promise;
       }
-      
+
       return result;
     };
   };
-  
+
   /**
    * Resolves a set of invocables. An invocable is a function to be invoked via `$injector.invoke()`,
    * and can have an arbitrary number of dependencies. An invocable can either return a value directly,
@@ -30766,7 +30768,7 @@ function $Resolve(  $q,    $injector) {
    * returned by an invocable is rejected, the `$resolve` promise is immediately rejected with the same error.
    * A rejection of a `parent` promise (if specified) will likewise be propagated immediately. Once the
    * `$resolve` promise has been rejected, no further invocables will be called.
-   * 
+   *
    * Cyclic dependencies between invocables are not permitted and will caues `$resolve` to throw an
    * error. As a special case, an injectable can depend on a parameter with the same name as the injectable,
    * which will be fulfilled from the `parent` injectable of the same name. This allows inherited values
@@ -30811,7 +30813,7 @@ $TemplateFactory.$inject = ['$http', '$templateCache', '$injector'];
 function $TemplateFactory(  $http,   $templateCache,   $injector) {
 
   /**
-   * Creates a template from a configuration object. 
+   * Creates a template from a configuration object.
    * @function
    * @name $templateFactory#fromConfig
    * @methodOf $templateFactory
@@ -30893,7 +30895,7 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
  * of search parameters. Multiple search parameter names are separated by '&'. Search parameters
  * do not influence whether or not a URL is matched, but their values are passed through into
  * the matched parameters returned by {@link UrlMatcher#exec exec}.
- * 
+ *
  * Path parameter placeholders can be specified using simple colon/catch-all syntax or curly brace
  * syntax, which optionally allows a regular expression for the parameter to be specified:
  *
@@ -30904,13 +30906,13 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
  *   curly braces, they must be in matched pairs or escaped with a backslash.
  *
  * Parameter names may contain only word characters (latin letters, digits, and underscore) and
- * must be unique within the pattern (across both path and search parameters). For colon 
+ * must be unique within the pattern (across both path and search parameters). For colon
  * placeholders or curly placeholders without an explicit regexp, a path parameter matches any
  * number of characters other than '/'. For catch-all placeholders the path parameter matches
  * any number of characters.
- * 
+ *
  * ### Examples
- * 
+ *
  * * '/hello/' - Matches only if the path is exactly '/hello/'. There is no special treatment for
  *   trailing slashes, and patterns have to match the entire path, not just a prefix.
  * * '/user/:id' - Matches '/user/bob' or '/user/1234!!!' or even '/user/' but not '/user' or
@@ -31147,7 +31149,7 @@ angular.module('ui.router.util').provider('$urlMatcherFactory', $UrlMatcherFacto
 
 $UrlRouterProvider.$inject = ['$urlMatcherFactoryProvider'];
 function $UrlRouterProvider(  $urlMatcherFactory) {
-  var rules = [], 
+  var rules = [],
       otherwise = null;
 
   // Returns a string that is a prefix of all strings matching the RegExp
@@ -31749,10 +31751,10 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         url = "#" + $locationProvider.hashPrefix() + url;
       }
       if (options.absolute && url) {
-        url = $location.protocol() + '://' + 
-              $location.host() + 
-              ($location.port() == 80 || $location.port() == 443 ? '' : ':' + $location.port()) + 
-              (!$locationProvider.html5Mode() && url ? '/' : '') + 
+        url = $location.protocol() + '://' +
+              $location.host() +
+              ($location.port() == 80 || $location.port() == 443 ? '' : ':' + $location.port()) +
+              (!$locationProvider.html5Mode() && url ? '/' : '') +
               url;
       }
       return url;
@@ -34216,7 +34218,7 @@ angular.module('ionic.decorator.location', [])
 
     return $location;
   }
-  
+
   $provide.decorator('$location', ['$delegate', '$timeout', $LocationDecorator]);
 }]);
 
@@ -37107,7 +37109,7 @@ angular.module('ionic.ui.toggle', [])
          checkbox = el.children[0];
          track = el.children[1];
          handle = track.children[0];
-         
+
          var ngModelController = angular.element(checkbox).controller('ngModel');
 
          $scope.toggle = new ionic.views.Toggle({

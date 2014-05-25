@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Editor</title>
+  <style type="text/css" media="screen">
+    body {
+        overflow: hidden;
+    }
+
+    #editor {
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+  </style>
+    		<meta charset="utf-8" />
+		<!--<meta name="format-detection" content="telephone=no" />-->
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>phonegapDemo app</title>
+		<script src="phonegap.js"></script>
+
+
+        <!--other Demos-->
+        <!--ace demo-->
+        <script src="Demos/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+            <pre id="editor">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
+    <script>
+    // trigger extension
+    ace.require("ace/ext/language_tools");
+    var editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/html");
+    editor.setTheme("ace/theme/tomorrow");
+    // enable autocompletion and snippets
+    editor.setOptions({
+        enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: true
+    });
+</script>
+        </ion-nav-view>
+
+
+
+</body>
+</html>

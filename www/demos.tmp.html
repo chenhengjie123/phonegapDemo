@@ -1,12 +1,16 @@
 <!-- Center content -->
 
 <ion-view title="WebDemos">
-    <ion-content scroll="false">
-        demos(only can be open in computer right now )
-    </ion-content>
+    <ace-editor class="has-header has-footer">
+
+
+
+        <pre class="has-header has-footer" id="editor" data-ng-init="initEditor()" style="height: {{deviceHeight-89}}px; ">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
+
+    </ace-editor>
 </ion-view>
-
-
-
-
-

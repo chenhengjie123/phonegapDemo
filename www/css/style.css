@@ -4,4 +4,11 @@
 
 .has-double-header{
   top:88px;
-};
+}
+
+
+#editor {
+    position: absolute;
+    right: 0;
+    left: 0;
+}
